@@ -13,6 +13,7 @@ func main() {
 			Version: "0.1.02",
 			Rules: []tflint.Rule{
 				rules.NewOktaPolicyNameRule(),
+				rules.NewOktaAppOauthOmitSecretRule(),
 			},
 		},
 	})

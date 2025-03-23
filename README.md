@@ -68,6 +68,7 @@ plugin "okta" {
 |Name|Description|Severity|Enabled|Link|
 | --- | --- | --- | --- | --- |
 |okta_policy_name_rule.go|Rule for checking length of okta_auth_server_policy_rule attribute name|ERROR|✔||
+|okta_app_oauth_omit_secret_rule.go|Rule for checking OAuth application secrets are omitted|WARNING|✔||
 
 ## Building the plugin
 

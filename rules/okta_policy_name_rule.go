@@ -1,13 +1,16 @@
 package rules
 
 import (
-	hcl "github.com/hashicorp/hcl/v2"
+	"fmt"
+
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
+	"github.com/terraform-linters/tflint-plugin-sdk/logger"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
-	"log"
 )
 
 // OktaPolicyNameRule checks whether ...
 type OktaPolicyNameRule struct {
+	tflint.DefaultRule
 	resourceType  string
 	attributeName string
 	max           int
@@ -35,38 +38,39 @@ func (r *OktaPolicyNameRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *OktaPolicyNameRule) Severity() string {
+func (r *OktaPolicyNameRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
-// Link returns the rule reference link
-func (r *OktaPolicyNameRule) Link() string {
-	return ""
-}
-
 func (r *OktaPolicyNameRule) Check(runner tflint.Runner) error {
-	log.Printf("[TRACE] Check `%s` rule", r.Name())
+	logger.Trace(fmt.Sprintf("Check %s rule", r.Name()))
 
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
 
-		return runner.EnsureNoError(err, func() error {
-			if len(val) > r.max {
-				runner.EmitIssueOnExpr(
-					r,
-					"Name must be from 1 to 50 characters",
-					attribute.Expr,
-				)
-			}
-			if len(val) < r.min {
-				runner.EmitIssueOnExpr(
-					r,
-					"Name must be from 1 to 50 characters",
-					attribute.Expr,
-				)
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
+		err := runner.EvaluateExpr(attribute.Expr, func(policyName string) error {
+			if len(policyName) > r.max || len(policyName) < r.min {
+				err = runner.EmitIssue(r, "Name must be from 1 to 50 characters", attribute.Range)
+				if err != nil {
+					return err
+				}
 			}
 			return nil
-		})
-	})
+		}, nil)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

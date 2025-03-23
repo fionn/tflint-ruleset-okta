@@ -82,7 +82,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 					Message: "Name must be from 1 to 50 characters",
 					Range: hcl.Range{
 						Filename: "resource.tf",
-						Start:    hcl.Pos{Line: 3, Column: 10},
+						Start:    hcl.Pos{Line: 3, Column: 3},
 						End:      hcl.Pos{Line: 3, Column: 12},
 					},
 				},
@@ -121,7 +121,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 					Message: "Name must be from 1 to 50 characters",
 					Range: hcl.Range{
 						Filename: "resource.tf",
-						Start:    hcl.Pos{Line: 3, Column: 10},
+						Start:    hcl.Pos{Line: 3, Column: 3},
 						End:      hcl.Pos{Line: 3, Column: 63},
 					},
 				},

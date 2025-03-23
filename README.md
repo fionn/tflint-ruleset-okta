@@ -6,7 +6,7 @@ This is a repository for building an Okta ruleset.
 ## Requirements
 
 - TFLint v0.30+
-- Go v1.16
+- Go v1.24
 
 ## Installation
 

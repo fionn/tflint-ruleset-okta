@@ -1,24 +1,63 @@
-# This is an example goreleaser.yaml file with some sane defaults.
-# Make sure to check the documentation at http://goreleaser.com
-env:
-  - CGO_ENABLED=0
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+    - git --no-pager diff --exit-code go.mod go.sum
+
 builds:
-  - goos:
-      - linux
-      - darwin
-      - windows
-    goarch:
-      - amd64
-      - arm
-      - arm64
+
+  - env:
+      - CGO_ENABLED=0
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    ldflags:
+      - "-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}"
+    targets:
+      - darwin_arm64
+      - linux_arm64
+      - linux_amd64
+
+    hooks:
+      post:
+        - mkdir -p ./dist/raw
+        - cp "{{ .Path }}" "./dist/raw/{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+
 archives:
+
   - id: zip
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
-    format: zip
-    files:
-      - none*
+    formats:
+      - zip
+
 checksum:
-  name_template: 'checksums.txt'
+  name_template: checksums.txt
+  extra_files:
+    - glob: ./dist/raw/*
+
 signs:
-  - artifacts: checksum
-    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
+
+  - id: pgp
+    artifacts: checksum
+    args:
+      - "--batch"
+      - "--local-user"
+      - "{{ .Env.PGP_FINGERPRINT }}"
+      - "--output"
+      - "${signature}"
+      - "--detach-sign"
+      - "${artifact}"
+
+  - id: cosign-keyless
+    cmd: cosign
+    signature: "${artifact}.keyless.sig"
+    certificate: "${artifact}.keyless.pem"
+    output: true
+    artifacts: checksum
+    args:
+      - sign-blob
+      - "--output-certificate=${certificate}"
+      - "--output-signature=${signature}"
+      - '${artifact}'
+      - --yes

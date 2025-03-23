@@ -1,85 +1,69 @@
-# TFLint Okta Template
-[![Build Status](https://github.com/vazuev/tflint-ruleset-okta/workflows/build/badge.svg?branch=main)](https://github.com/vazuev/tflint-ruleset-okta/actions)
+# TFLint Ruleset for the Terraform Provider for Okta
 
-This is a repository for building an Okta ruleset.
+[![Build Status](https://github.com/fionn/tflint-ruleset-okta/actions/workflows/main.yml/badge.svg)](https://github.com/fionn/tflint-ruleset-okta/actions)
+[![Latest Release](https://img.shields.io/github/v/release/fionn/tflint-ruleset-okta.svg)](https://github.com/fionn/tflint-ruleset-okta/releases/tag/v0.1.5)
 
 ## Requirements
 
-- TFLint v0.30+
+- TFLint v0.55
 - Go v1.24
 
 ## Installation
 
-You can install the plugin with `tflint --init`. Declare a config in `.tflint.hcl` as follows:
+Declare a configuration in `.tflint.hcl` with
 
 ```hcl
 plugin "okta" {
   enabled = true
-  version = "0.1.02"
-  source  = "github.com/vazuev/tflint-ruleset-okta"
+  version = "0.1.5"
+  source  = "github.com/fionn/tflint-ruleset-okta"
+
   signing_key = <<-KEY
   -----BEGIN PGP PUBLIC KEY BLOCK-----
 
-  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
-  yUl3m1viNNT6muQXVx655+y7EQX2NOBpcjI=
-  =vEzD
+  mQINBGco6XgBEADlN00F0WdZURlnyD5MuiqyvB2i0qGiFrLZADbRKbVujyISSCkP
+  0zvD/Qbj0oUH2WYKcXBqHvMK7FEsZlguO72oPKYdp9PX5qkMAv+oF+r9RIcxnx+f
+  xQxdxjIGzzJRm98Xv32noTV+YjKwvmk1W0OAk02IVfSlRwPEziVp63WH1gosXjwW
+  luK5B8NCvXu6XAd+evEqtghkkd2tK1s/h3Iru0dcygibHfbxh8cDmF8TWUPV7Tjn
+  e8ANHHljoESH1/7F3cpq6OamO9q4yWKh4DRzqAQ93KTgHkkOZSJsnFyRNn1PTXb6
+  y7Vk+WI4LNsvo/vqqqgh4N+6Ii5EUdrbFE/6L0ya+iBjE2aPP8FhIjjBb9fVOpdY
+  ogo7eG4WrWuq9w+8ep+ygmSR4v9quMAV1I2NU90Od1cnrppzP72iwgs69k9M8dPH
+  jBeEO5c6lcAkaxlxSetZTu9sPV0xuFFk9DTPYz0I8CLLWo2GSkooGjjduJWejbOW
+  yca6RTgQX6M8yikkqZ7cBcpTV/ps3DTdDN4VgDtmnFB6sS+8QIa6/Q5xOJZeZnJ8
+  CWq3km7JPG1XmiqEF54t0pV0axvbpmsD5HTW8ZmS8chx7pK1d3yiAvAOxRRq9Jro
+  h6kETmZyhM2UPr5lWVNnIGm5TOJiS/f9J6k5x0RbvaMxxu4CaAMagUHJLwARAQAB
+  tCNnaXRodWIuY29tL2Zpb25uIDxmaW9ubkBnaXRodWIuY29tPokCUQQTAQgAOxYh
+  BF3RuD1BjR3luO5n/MHAfDRDGEtyBQJnKOl4AhsDBQsJCAcCAiICBhUKCQgLAgQW
+  AgMBAh4HAheAAAoJEMHAfDRDGEtydMIP/Al4fpvl8HYfracFb2bR82I816pYOyHI
+  DMVU7hv2Gm6+Y5pF0v+GO9Xq+k3+RWqME3QSV/FD1Xcny1FrbTL7RqRbYhJkfrUW
+  hiq5QSJleoj4+CqRTKlU6mA6NBmnBuwEhNMo6Aj06VKIyifcUqp9oPuJq3L3+0sD
+  eZBjKK44YMk0fEhA7I4XLHX58PfXxDY/S32wAJ6m9lbcCCeL2N4tB0E4QDREu/o/
+  aGF93uVG0y3W8zAfWZRBwbcEVG0iMMfcRIty2xoMNrBpwrMO9hEXqJJJNyQQvXUQ
+  IrH45FFrNTvcbVksYrtcRN+2JqHS8oRFInbjDcg7bWs2g8AI24Ve9xtiwhvvkHCR
+  5LOhbxM+OmuouYpHKZ660QiXpmhiw3xXUjzUSQMEcaFvQHHH62M73FflmqqPprfP
+  U32zyjpsj1oZd51sM6GkByEEsRCvr7596BSntMY1Ujmnui43R8SgYTkep+HAg6HL
+  E25y9+9tUUMm4SPvJUjpJGYDxJgLW7xme/c/Y8oRwBkNpIyImdyklfwsony/JLNv
+  hd7/dz2Dzi89qgLz3ivDrYWcVcEAJ3fwCJ5f4xPIrVv7kAZ5h5g2SBgTvNLqYBI7
+  +wopdKt1ZOQ5K17Awk+ka+1AqpOMMDKkERHdRXQPyhnw6XLDhQePXET63Ra1nVwz
+  q2ZhLadqJl0JiHUEEBYKAB0WIQRshvCwZ5KaqUFUxerw5hH2wB6mAAUCZyjp0AAK
+  CRDw5hH2wB6mAMRCAPoCS09+62vOhCVPbu03WwSLaBbobMSSHVjpFvyCGz+/HgD9
+  HC8rgJIKcpKxKQ15DlsGjTVDmoMVLg6/mUeUzB2OUAI=
+  =atYQ
   -----END PGP PUBLIC KEY BLOCK-----
   KEY
 }
 ```
+and install with `tflint --init`.
 
 ## Rules
 
-|Name|Description|Severity|Enabled|Link|
-| --- | --- | --- | --- | --- |
-|okta_policy_name_rule.go|Rule for checking length of okta_auth_server_policy_rule attribute name|ERROR|✔||
-|okta_app_oauth_omit_secret_rule.go|Rule for checking OAuth application secrets are omitted|WARNING|✔||
+|Name|Description|Severity|Enabled|
+| --- | --- | --- | --- |
+|`okta_policy_name`|Check the length of `okta_auth_server_policy`'s `name` attribute|ERROR|✔|
+|`okta_app_oauth_omit_secret`|Check that OAuth application secrets are omitted|WARNING|✔|
 
-## Building the plugin
+## Build
 
-Clone the repository locally and run the following command:
+Build with `make build`.
 
-```
-$ make
-```
-
-You can easily install the built plugin with the following:
-
-```
-$ make install
-```
+Install with `make install`.

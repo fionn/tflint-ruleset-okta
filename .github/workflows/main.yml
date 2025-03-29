@@ -36,6 +36,7 @@ jobs:
     permissions:
       contents: read
       checks: write
+      security-events: write
 
     steps:
 
@@ -54,6 +55,15 @@ jobs:
         uses: golangci/golangci-lint-action@v7
         with:
           version: v2.0.2
+
+      - name: Check for vulnerable dependency use
+        run: go tool govulncheck -format sarif ./... > govulncheck.sarif
+
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: govulncheck.sarif
+          category: govulncheck
 
   test:
 

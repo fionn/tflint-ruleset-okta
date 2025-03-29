@@ -27,7 +27,7 @@ func NewOktaAppOauthOmitSecretRule() *OktaAppOauthOmitSecretRule {
 
 // Name returns the rule name
 func (r *OktaAppOauthOmitSecretRule) Name() string {
-	return "okta_app_oauth_omit_secret_rule"
+	return "okta_app_oauth_omit_secret"
 }
 
 // Enabled returns whether the rule is enabled by default
@@ -41,7 +41,9 @@ func (r *OktaAppOauthOmitSecretRule) Severity() tflint.Severity {
 }
 
 func (r *OktaAppOauthOmitSecretRule) Check(runner tflint.Runner) error {
-	logger.Trace(fmt.Sprintf("Check %s rule", r.Name()))
+	logger.Debug(fmt.Sprintf("checking %s rule", r.Name()))
+
+	issueMessage := "OAuth application secret should be omitted"
 
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
@@ -53,7 +55,7 @@ func (r *OktaAppOauthOmitSecretRule) Check(runner tflint.Runner) error {
 	for _, resource := range resources.Blocks {
 		attribute, exists := resource.Body.Attributes[r.attributeName]
 		if !exists {
-			err = runner.EmitIssue(r, "OAuth application secret should be omitted", resource.DefRange)
+			err = runner.EmitIssue(r, issueMessage, resource.DefRange)
 			if err != nil {
 				return err
 			}
@@ -62,7 +64,7 @@ func (r *OktaAppOauthOmitSecretRule) Check(runner tflint.Runner) error {
 
 		err := runner.EvaluateExpr(attribute.Expr, func(omitSecret bool) error {
 			if !omitSecret {
-				err = runner.EmitIssue(r, "OAuth application secret should be omitted", attribute.Range)
+				err = runner.EmitIssue(r, issueMessage, attribute.Range)
 				if err != nil {
 					return err
 				}

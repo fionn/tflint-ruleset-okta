@@ -29,7 +29,7 @@ func NewOktaPolicyNameRule() *OktaPolicyNameRule {
 
 // Name returns the rule name
 func (r *OktaPolicyNameRule) Name() string {
-	return "okta_policy_name_rule"
+	return "okta_auth_server_policy_name_length"
 }
 
 // Enabled returns whether the rule is enabled by default
@@ -43,7 +43,7 @@ func (r *OktaPolicyNameRule) Severity() tflint.Severity {
 }
 
 func (r *OktaPolicyNameRule) Check(runner tflint.Runner) error {
-	logger.Trace(fmt.Sprintf("Check %s rule", r.Name()))
+	logger.Debug(fmt.Sprintf("checking %s rule", r.Name()))
 
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},

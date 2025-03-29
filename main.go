@@ -14,6 +14,7 @@ func main() {
 			Rules: []tflint.Rule{
 				rules.NewOktaPolicyNameRule(),
 				rules.NewOktaAppOauthOmitSecretRule(),
+				rules.NewOktaAppOauthPlaintextRedirectURIRule(),
 			},
 		},
 	})

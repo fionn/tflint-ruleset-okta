@@ -27,6 +27,7 @@ and install with `tflint --init`.
 | --- | --- | --- | --- |
 |`okta_auth_server_policy_name_length`|Check the length of `okta_auth_server_policy`'s `name` attribute|ERROR|✔|
 |`okta_app_oauth_omit_secret`|Check that OAuth application secrets are omitted|WARNING|✔|
+|`okta_app_oauth_plaintext_redirect_uri`|Check that remote redirect URIs are using HTTPS|WARNING|✔|
 
 ## Build
 

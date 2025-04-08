@@ -59,6 +59,9 @@ jobs:
         with:
           version: v2.0.2
 
+      - name: Check dependency tidiness
+        run: go mod tidy -diff
+
       - name: Check for vulnerable dependency use
         run: go tool govulncheck -format sarif ./... > govulncheck.sarif
 

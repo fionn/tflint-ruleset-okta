@@ -10,7 +10,7 @@ func main() {
 	plugin.Serve(&plugin.ServeOpts{
 		RuleSet: &tflint.BuiltinRuleSet{
 			Name:    "okta",
-			Version: "0.1.6",
+			Version: "0.1.7",
 			Rules: []tflint.Rule{
 				rules.NewOktaPolicyNameRule(),
 				rules.NewOktaAppOauthOmitSecretRule(),

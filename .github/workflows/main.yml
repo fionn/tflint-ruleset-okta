@@ -57,7 +57,7 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v7
         with:
-          version: v2.0.2
+          version: v2.1.6
 
       - name: Check dependency tidiness
         run: go mod tidy -diff

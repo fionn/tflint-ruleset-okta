@@ -26,7 +26,7 @@ func NewOktaAppImplicitAuthenticationPolicyRule() *OktaAppImplicitAuthentication
 
 // Name returns the rule name
 func (r *OktaAppImplicitAuthenticationPolicyRule) Name() string {
-	return "okta_app_oauth_omit_secret"
+	return "okta_app_implicit_authentication_policy"
 }
 
 // Enabled returns whether the rule is enabled by default

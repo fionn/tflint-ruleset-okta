@@ -3,7 +3,7 @@ module github.com/terraform-linters/tflint-ruleset-okta
 go 1.24.1
 
 require (
-	github.com/hashicorp/hcl/v2 v2.23.0
+	github.com/hashicorp/hcl/v2 v2.24.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.22.0
 )
 
@@ -24,7 +24,7 @@ require (
 	github.com/stretchr/testify v1.10.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	github.com/zclconf/go-cty v1.16.2 // indirect
+	github.com/zclconf/go-cty v1.16.3 // indirect
 	golang.org/x/mod v0.24.0 // indirect
 	golang.org/x/net v0.40.0 // indirect
 	golang.org/x/sync v0.14.0 // indirect

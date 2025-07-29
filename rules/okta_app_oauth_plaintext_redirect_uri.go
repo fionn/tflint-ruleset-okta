@@ -32,14 +32,12 @@ func isNonLocalPlaintext(redirectURI string) (bool, error) {
 	return true, nil
 }
 
-// OktaPolicyNameRule checks whether ...
 type OktaAppOauthPlaintextRedirectURIRule struct {
 	tflint.DefaultRule
 	resourceType  string
 	attributeName string
 }
 
-// NewOktaPolicyNameRule returns a new rule
 func NewOktaAppOauthPlaintextRedirectURIRule() *OktaAppOauthPlaintextRedirectURIRule {
 	return &OktaAppOauthPlaintextRedirectURIRule{
 		resourceType:  "okta_app_oauth",
@@ -47,17 +45,14 @@ func NewOktaAppOauthPlaintextRedirectURIRule() *OktaAppOauthPlaintextRedirectURI
 	}
 }
 
-// Name returns the rule name
 func (r *OktaAppOauthPlaintextRedirectURIRule) Name() string {
 	return "okta_app_oauth_plaintext_redirect_uri"
 }
 
-// Enabled returns whether the rule is enabled by default
 func (r *OktaAppOauthPlaintextRedirectURIRule) Enabled() bool {
 	return true
 }
 
-// Severity returns the rule severity
 func (r *OktaAppOauthPlaintextRedirectURIRule) Severity() tflint.Severity {
 	return tflint.WARNING
 }

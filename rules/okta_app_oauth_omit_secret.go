@@ -8,7 +8,6 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// OktaPolicyNameRule checks whether ...
 type OktaAppOauthOmitSecretRule struct {
 	tflint.DefaultRule
 	resourceType  string
@@ -16,7 +15,6 @@ type OktaAppOauthOmitSecretRule struct {
 	expected      bool
 }
 
-// NewOktaPolicyNameRule returns a new rule
 func NewOktaAppOauthOmitSecretRule() *OktaAppOauthOmitSecretRule {
 	return &OktaAppOauthOmitSecretRule{
 		resourceType:  "okta_app_oauth",
@@ -25,17 +23,14 @@ func NewOktaAppOauthOmitSecretRule() *OktaAppOauthOmitSecretRule {
 	}
 }
 
-// Name returns the rule name
 func (r *OktaAppOauthOmitSecretRule) Name() string {
 	return "okta_app_oauth_omit_secret"
 }
 
-// Enabled returns whether the rule is enabled by default
 func (r *OktaAppOauthOmitSecretRule) Enabled() bool {
 	return true
 }
 
-// Severity returns the rule severity
 func (r *OktaAppOauthOmitSecretRule) Severity() tflint.Severity {
 	return tflint.WARNING
 }

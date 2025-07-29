@@ -8,7 +8,6 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// OktaPolicyNameRule checks whether ...
 type OktaPolicyNameRule struct {
 	tflint.DefaultRule
 	resourceType  string
@@ -17,7 +16,6 @@ type OktaPolicyNameRule struct {
 	min           int
 }
 
-// NewOktaPolicyNameRule returns a new rule
 func NewOktaPolicyNameRule() *OktaPolicyNameRule {
 	return &OktaPolicyNameRule{
 		resourceType:  "okta_auth_server_policy",
@@ -27,17 +25,14 @@ func NewOktaPolicyNameRule() *OktaPolicyNameRule {
 	}
 }
 
-// Name returns the rule name
 func (r *OktaPolicyNameRule) Name() string {
 	return "okta_auth_server_policy_name_length"
 }
 
-// Enabled returns whether the rule is enabled by default
 func (r *OktaPolicyNameRule) Enabled() bool {
 	return true
 }
 
-// Severity returns the rule severity
 func (r *OktaPolicyNameRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }

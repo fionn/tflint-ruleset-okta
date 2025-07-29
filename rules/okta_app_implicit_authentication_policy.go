@@ -15,7 +15,6 @@ type OktaAppImplicitAuthenticationPolicyRule struct {
 	expected      bool
 }
 
-// Create a rule.
 func NewOktaAppImplicitAuthenticationPolicyRule() *OktaAppImplicitAuthenticationPolicyRule {
 	return &OktaAppImplicitAuthenticationPolicyRule{
 		resourceTypes: [2]string{"okta_app_oauth", "okta_app_saml"},
@@ -24,17 +23,14 @@ func NewOktaAppImplicitAuthenticationPolicyRule() *OktaAppImplicitAuthentication
 	}
 }
 
-// Name returns the rule name
 func (r *OktaAppImplicitAuthenticationPolicyRule) Name() string {
 	return "okta_app_implicit_authentication_policy"
 }
 
-// Enabled returns whether the rule is enabled by default
 func (r *OktaAppImplicitAuthenticationPolicyRule) Enabled() bool {
 	return false
 }
 
-// Severity returns the rule severity
 func (r *OktaAppImplicitAuthenticationPolicyRule) Severity() tflint.Severity {
 	return tflint.NOTICE
 }

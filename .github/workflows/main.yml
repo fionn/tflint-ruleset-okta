@@ -163,6 +163,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           PGP_FINGERPRINT: ${{ steps.pgp.outputs.fingerprint }}
 
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@v3
         with:
           subject-path: dist/checksums.txt

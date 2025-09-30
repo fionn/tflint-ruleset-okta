@@ -1,4 +1,4 @@
-module github.com/terraform-linters/tflint-ruleset-okta
+module github.com/fionn/tflint-ruleset-okta
 
 go 1.24.1
 

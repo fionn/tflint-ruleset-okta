@@ -20,7 +20,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Download dependencies
         run: go mod download
@@ -46,7 +46,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v6
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Check formatting
         run: test -z "$(gofmt -l .)"
@@ -84,7 +84,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Test
         run: make test
@@ -102,7 +102,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
@@ -142,7 +142,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: 1.24
+          go-version-file: go.mod
 
       - name: Import PGP key
         id: pgp

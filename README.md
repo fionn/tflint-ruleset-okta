@@ -15,7 +15,7 @@ Declare a configuration in `.tflint.hcl` with
 ```hcl
 plugin "okta" {
   enabled = true
-  version = "0.1.9"
+  version = "x.y.z"  # Replace with desired version.
   source  = "github.com/fionn/tflint-ruleset-okta"
 }
 ```

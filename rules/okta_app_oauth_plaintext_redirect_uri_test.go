@@ -1,10 +1,12 @@
-package rules
+package rules_test
 
 import (
 	"testing"
 
 	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
+
+	"github.com/fionn/tflint-ruleset-okta/rules"
 )
 
 func TestOktaAppOauthPlaintextRedirectURI(t *testing.T) {
@@ -37,7 +39,7 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaAppOauthPlaintextRedirectURIRule(),
+					Rule:    rules.NewOktaAppOauthPlaintextRedirectURIRule(),
 					Message: "Non-local redirect URI http://example.com/ should use TLS",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -55,7 +57,7 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaAppOauthPlaintextRedirectURIRule(),
+					Rule:    rules.NewOktaAppOauthPlaintextRedirectURIRule(),
 					Message: "Non-local redirect URI http://example.com/ should use TLS",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -73,7 +75,7 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaAppOauthPlaintextRedirectURIRule(),
+					Rule:    rules.NewOktaAppOauthPlaintextRedirectURIRule(),
 					Message: "Non-local redirect URI http://one.example.com/ should use TLS",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -82,7 +84,7 @@ resource "okta_app_oauth" "example" {
 					},
 				},
 				{
-					Rule:    NewOktaAppOauthPlaintextRedirectURIRule(),
+					Rule:    rules.NewOktaAppOauthPlaintextRedirectURIRule(),
 					Message: "Non-local redirect URI http://two.example.com/ should use TLS",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -134,7 +136,7 @@ resource "okta_app_oauth" "example" {
 		},
 	}
 
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
+	rule := rules.NewOktaAppOauthPlaintextRedirectURIRule()
 
 	for _, tc := range cases {
 		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})

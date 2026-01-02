@@ -1,10 +1,12 @@
-package rules
+package rules_test
 
 import (
 	"testing"
 
 	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
+
+	"github.com/fionn/tflint-ruleset-okta/rules"
 )
 
 func TestOktaAppImplicitAuthenticationPolicy(t *testing.T) {
@@ -36,7 +38,7 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaAppImplicitAuthenticationPolicyRule(),
+					Rule:    rules.NewOktaAppImplicitAuthenticationPolicyRule(),
 					Message: "Application implicitly uses the default authentication policy",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -53,7 +55,7 @@ resource "okta_app_saml" "example" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaAppImplicitAuthenticationPolicyRule(),
+					Rule:    rules.NewOktaAppImplicitAuthenticationPolicyRule(),
 					Message: "Application implicitly uses the default authentication policy",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -65,7 +67,7 @@ resource "okta_app_saml" "example" {
 		},
 	}
 
-	rule := NewOktaAppImplicitAuthenticationPolicyRule()
+	rule := rules.NewOktaAppImplicitAuthenticationPolicyRule()
 
 	for _, tc := range cases {
 		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})

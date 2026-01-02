@@ -1,9 +1,12 @@
-package rules
+package rules_test
 
 import (
+	"testing"
+
 	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
-	"testing"
+
+	"github.com/fionn/tflint-ruleset-okta/rules"
 )
 
 func TestOktaPolicyNameRule(t *testing.T) {
@@ -36,7 +39,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaPolicyNameRule(),
+					Rule:    rules.NewOktaPolicyNameRule(),
 					Message: "Name must be from 1 to 50 characters",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -54,7 +57,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 }`,
 			Expected: helper.Issues{
 				{
-					Rule:    NewOktaPolicyNameRule(),
+					Rule:    rules.NewOktaPolicyNameRule(),
 					Message: "Name must be from 1 to 50 characters",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -66,7 +69,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 		},
 	}
 
-	rule := NewOktaPolicyNameRule()
+	rule := rules.NewOktaPolicyNameRule()
 
 	for _, tc := range cases {
 		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})

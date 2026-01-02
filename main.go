@@ -7,11 +7,13 @@ import (
 	"github.com/fionn/tflint-ruleset-okta/rules"
 )
 
+var version = "dev"
+
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
 		RuleSet: &tflint.BuiltinRuleSet{
 			Name:    "okta",
-			Version: "0.1.10",
+			Version: version,
 			Rules: []tflint.Rule{
 				rules.NewOktaPolicyNameRule(),
 				rules.NewOktaAppOauthOmitSecretRule(),

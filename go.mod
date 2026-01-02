@@ -1,6 +1,6 @@
 module github.com/fionn/tflint-ruleset-okta
 
-go 1.25.1
+go 1.25.5
 
 require (
 	github.com/hashicorp/hcl/v2 v2.24.0

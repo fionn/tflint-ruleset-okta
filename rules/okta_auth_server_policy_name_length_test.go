@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestOktaPolicyNameRuleOneChar(t *testing.T) {
+func TestOktaPolicyNameRule(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -20,27 +20,6 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaPolicyNameRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaPolicyNameRule50Char(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Length is 50",
 			Content: `
@@ -49,27 +28,6 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaPolicyNameRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaPolicyNameRuleZeroChar(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Length is 0",
 			Content: `
@@ -88,27 +46,6 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 				},
 			},
 		},
-	}
-
-	rule := NewOktaPolicyNameRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaPolicyNameRule51Char(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "name must be from 1 to 50 characters",
 			Content: `

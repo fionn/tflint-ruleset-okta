@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func TestOktaAppImplicitAuthenticationPolicyPresent(t *testing.T) {
+func TestOktaAppImplicitAuthenticationPolicy(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -29,27 +29,6 @@ resource "okta_app_saml" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppImplicitAuthenticationPolicyRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppImplicitAuthenticationPolicyMissing(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Authentication policy is omitted",
 			Content: `

@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneHTTPS(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURI(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -21,27 +21,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleTwoOfTwoHTTPS(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI two of two elements using HTTPS",
 			Content: `
@@ -50,27 +29,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneRemotePlaintext(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one elements using HTTP",
 			Content: `
@@ -89,27 +47,6 @@ resource "okta_app_oauth" "example" {
 				},
 			},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfTwoRemotePlaintext(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of two elements using HTTP",
 			Content: `
@@ -128,27 +65,6 @@ resource "okta_app_oauth" "example" {
 				},
 			},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleTwoOfTwoRemotePlaintext(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of two elements using HTTP",
 			Content: `
@@ -176,27 +92,6 @@ resource "okta_app_oauth" "example" {
 				},
 			},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTP(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one element using HTTP locally",
 			Content: `
@@ -205,27 +100,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTPExplicitPort(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one element using HTTP locally",
 			Content: `
@@ -234,27 +108,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTPS(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one element using HTTPS locally",
 			Content: `
@@ -263,27 +116,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalhostHTTP(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one element using HTTP at localhost",
 			Content: `
@@ -292,27 +124,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthPlaintextRedirectURIRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalhostHTTPS(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Redirect URI one of one element using HTTPS at localhost",
 			Content: `

@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func TestOktaAppOauthOmitSecretTrue(t *testing.T) {
+func TestOktaAppOauthOmitSecret(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -21,27 +21,6 @@ resource "okta_app_oauth" "example" {
 }`,
 			Expected: helper.Issues{},
 		},
-	}
-
-	rule := NewOktaAppOauthOmitSecretRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthOmitSecretFalse(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Secret is not omitted",
 			Content: `
@@ -60,27 +39,6 @@ resource "okta_app_oauth" "example" {
 				},
 			},
 		},
-	}
-
-	rule := NewOktaAppOauthOmitSecretRule()
-
-	for _, tc := range cases {
-		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
-
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-
-		helper.AssertIssues(t, tc.Expected, runner.Issues)
-	}
-}
-
-func TestOktaAppOauthOmitSecretMissing(t *testing.T) {
-	cases := []struct {
-		Name     string
-		Content  string
-		Expected helper.Issues
-	}{
 		{
 			Name: "Secret is implicitly not omitted",
 			Content: `

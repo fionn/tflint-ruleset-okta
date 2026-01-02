@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func Test_OktaAppOauthOmitSecret_True(t *testing.T) {
+func TestOktaAppOauthOmitSecretTrue(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -36,7 +36,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthOmitSecret_False(t *testing.T) {
+func TestOktaAppOauthOmitSecretFalse(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -75,7 +75,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthOmitSecret_Missing(t *testing.T) {
+func TestOktaAppOauthOmitSecretMissing(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string

@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func Test_OktaPolicyNameRule_OneChar(t *testing.T) {
+func TestOktaPolicyNameRuleOneChar(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -35,7 +35,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 	}
 }
 
-func Test_OktaPolicyNameRule_50Char(t *testing.T) {
+func TestOktaPolicyNameRule50Char(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -64,7 +64,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 	}
 }
 
-func Test_OktaPolicyNameRule_ZeroChar(t *testing.T) {
+func TestOktaPolicyNameRuleZeroChar(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -103,7 +103,7 @@ resource "okta_auth_server_policy" "auditlogservice_read" {
 	}
 }
 
-func Test_OktaPolicyNameRule_51Char(t *testing.T) {
+func TestOktaPolicyNameRule51Char(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string

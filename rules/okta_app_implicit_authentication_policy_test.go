@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func Test_OktaAppImplicitAuthenticationPolicy_Present(t *testing.T) {
+func TestOktaAppImplicitAuthenticationPolicyPresent(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -44,7 +44,7 @@ resource "okta_app_saml" "example" {
 	}
 }
 
-func Test_OktaAppImplicitAuthenticationPolicy_Missing(t *testing.T) {
+func TestOktaAppImplicitAuthenticationPolicyMissing(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string

@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneHTTPS(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneHTTPS(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -36,7 +36,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_TwoOfTwoHTTPS(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleTwoOfTwoHTTPS(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -65,7 +65,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneRemotePlaintext(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneRemotePlaintext(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -104,7 +104,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfTwoRemotePlaintext(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfTwoRemotePlaintext(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -143,7 +143,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_TwoOfTwoRemotePlaintext(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleTwoOfTwoRemotePlaintext(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -191,7 +191,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneLocalHTTP(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTP(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -220,7 +220,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneLocalHTTPExplicitPort(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTPExplicitPort(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -249,7 +249,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneLocalHTTPS(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalHTTPS(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -278,7 +278,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneLocalhostHTTP(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalhostHTTP(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -307,7 +307,7 @@ resource "okta_app_oauth" "example" {
 	}
 }
 
-func Test_OktaAppOauthPlaintextRedirectURIRule_OneOfOneLocalhostHTTPS(t *testing.T) {
+func TestOktaAppOauthPlaintextRedirectURIRuleOneOfOneLocalhostHTTPS(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string

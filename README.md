@@ -3,12 +3,9 @@
 [![Build Status](https://github.com/fionn/tflint-ruleset-okta/actions/workflows/main.yml/badge.svg)](https://github.com/fionn/tflint-ruleset-okta/actions)
 [![Latest Release](https://img.shields.io/github/v/release/fionn/tflint-ruleset-okta.svg)](https://github.com/fionn/tflint-ruleset-okta/releases/latest)
 
-## Requirements
+## Usage
 
-- TFLint v0.55
-- Go v1.24
-
-## Installation
+### Installation
 
 Declare a configuration in `.tflint.hcl` with
 
@@ -21,7 +18,7 @@ plugin "okta" {
 ```
 and install with `tflint --init`.
 
-## Rules
+### Rules
 
 |Name|Description|Severity|Enabled|
 | --- | --- | --- | --- |

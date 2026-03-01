@@ -116,12 +116,12 @@ jobs:
         uses: sigstore/cosign-installer@v3
 
       - name: Check goreleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           args: check
 
       - name: Check goreleaser dependencies
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           args: healthcheck
 
@@ -165,7 +165,7 @@ jobs:
         uses: sigstore/cosign-installer@v3
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v7
         with:
           args: release --fail-fast
         env:

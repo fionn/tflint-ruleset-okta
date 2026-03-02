@@ -5,7 +5,11 @@ updates:
   schedule:
     interval: quarterly
   open-pull-requests-limit: 10
+  cooldown:
+    default-days: 2
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
     interval: quarterly
+  cooldown:
+    default-days: 2

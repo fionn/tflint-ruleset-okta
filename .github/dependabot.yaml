@@ -3,13 +3,13 @@ updates:
 - package-ecosystem: gomod
   directory: "/"
   schedule:
-    interval: quarterly
+    interval: semiannually
   open-pull-requests-limit: 10
   cooldown:
-    default-days: 2
+    default-days: 7
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: quarterly
+    interval: semiannually
   cooldown:
-    default-days: 2
+    default-days: 7

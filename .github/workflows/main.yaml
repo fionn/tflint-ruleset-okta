@@ -37,8 +37,6 @@ jobs:
 
     permissions:
       contents: read
-      checks: write
-      security-events: write
 
     steps:
 
@@ -63,6 +61,48 @@ jobs:
         with:
           version: v2.10.1
 
+  test:
+
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
+      - name: Test
+        run: make test
+
+  check_dependencies:
+
+    name: Check dependencies
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      checks: write
+      security-events: write
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
       - name: Check dependency tidiness
         run: go mod tidy -diff
 
@@ -74,24 +114,6 @@ jobs:
         with:
           sarif_file: govulncheck.sarif
           category: govulncheck
-
-  test:
-
-    name: Test
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Set up Go
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-
-      - name: Test
-        run: make test
 
   check_goreleaser:
 
@@ -128,7 +150,7 @@ jobs:
   release:
 
     name: Release
-    needs: ["build", "lint", "test", "check_goreleaser"]
+    needs: ["build", "lint", "test", "check_goreleaser", "check_dependencies"]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
 
@@ -152,6 +174,7 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
+          cache: false
 
       - name: Import PGP key
         id: pgp

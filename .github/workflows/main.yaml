@@ -176,14 +176,6 @@ jobs:
           go-version-file: go.mod
           cache: false
 
-      - name: Import PGP key
-        id: pgp
-        uses: crazy-max/ghaction-import-gpg@v7
-        with:
-          gpg_private_key: ${{ secrets.PGP_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PGP_PASSPHRASE }}
-          fingerprint: 5DD1B83D418D1DE5B8EE67FCC1C07C3443184B72
-
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
@@ -193,7 +185,6 @@ jobs:
           args: release --fail-fast
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          PGP_FINGERPRINT: ${{ steps.pgp.outputs.fingerprint }}
 
       - uses: actions/attest-build-provenance@v4
         with:

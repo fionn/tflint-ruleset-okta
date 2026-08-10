@@ -37,17 +37,6 @@ checksum:
 
 signs:
 
-  - id: pgp
-    artifacts: checksum
-    args:
-      - "--batch"
-      - "--local-user"
-      - "{{ .Env.PGP_FINGERPRINT }}"
-      - "--output"
-      - "${signature}"
-      - "--detach-sign"
-      - "${artifact}"
-
   - id: cosign-keyless
     cmd: cosign
     signature: "${artifact}.keyless.sig"

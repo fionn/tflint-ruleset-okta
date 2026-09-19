@@ -153,6 +153,7 @@ jobs:
     needs: ["build", "lint", "test", "check_goreleaser", "check_dependencies"]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    cache-mode: write-only
 
     environment: release
 

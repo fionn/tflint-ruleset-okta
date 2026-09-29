@@ -4,6 +4,11 @@
 [![Latest Release](https://img.shields.io/github/v/release/fionn/tflint-ruleset-okta.svg)](https://github.com/fionn/tflint-ruleset-okta/releases/latest)
 [![Go Reference](https://pkg.go.dev/badge/github.com/fionn/tflint-ruleset-okta.svg)](https://pkg.go.dev/github.com/fionn/tflint-ruleset-okta)
 
+> [!NOTE]
+> I wrote this in order to maintain a quality bar in the Okta infrastructure managed by my employer.
+> I no longer need to do this, however, so this project will be in maintenance mode for the foreseeable future.
+> If you use this and find it valuable, get in touch.
+
 ## Usage
 
 ### Installation

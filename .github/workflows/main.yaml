@@ -183,13 +183,14 @@ jobs:
       - name: Install Cosign
         uses: sigstore/cosign-installer@v3
 
-      - name: Run GoReleaser
+      - name: Release
         uses: goreleaser/goreleaser-action@v7.2.3
         with:
           args: release --fail-fast
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - uses: actions/attest-build-provenance@v4
+      - name: Attest
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/checksums.txt
